@@ -1,29 +1,39 @@
-import { Test, TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
 import { ProductService } from './product.service';
-import { Product } from './interfaces/product.interface'
-import { ProductModel } from './product.module'
-
+import { ProductModel } from './product.module';
+import { Product } from './interfaces/product.interface';
 
 describe('ProductService', () => {
   let productService: ProductService;
-  let productServiceMock: {
-      products: Product[] = [],
-      findAll(){
-        return Promise.resolve(this.products)
-      }
-  }
-  beforeEach(async () => {
+  const productsMock = [
+    {
+      name: 'mock1',
+      sku: 'sku-mock1',
+    },
+    {
+      name: 'mock2',
+      sku: 'sku-mock2',
+    },
+  ];
+  const productServiceMock = {
+    mock: [] = [...productsMock],
+    findAll(): Promise<Product[]> {
+      return Promise.resolve([...this.mock]);
+    },
+  };
+  beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [ProductModel],
+      providers: [ProductService],
     })
-    .overrideProvider(ProductService)
-    .useValue(productServiceMock)
-    .compile();
+      .overrideProvider(ProductService)
+      .useValue(productServiceMock)
+      .compile();
 
-    service = module.get<ProductService>(ProductService);
+    productService = moduleRef.get(ProductService);
   });
 
-  it('should be defined', () => {
-    expect(productService).toBeDefined();
+  it('should find all products', async () => {
+    const retorno = await productService.findAll();
+    expect(retorno).toStrictEqual(productsMock);
   });
 });
