@@ -1,19 +1,19 @@
-import { ObjectType, Field, Int } from 'type-graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 
 @ObjectType()
 export class ProductType {
   @Field()
-  readonly sku: string;
+  sku: string;
   @Field()
-  readonly name: string;
+  name: string;
   @Field()
-  readonly description: string;
+  description: string;
   @Field()
-  readonly isactive: boolean;
+  isactive: boolean;
   @Field(() => Int)
-  readonly price: number;
+  price: number;
   @Field(() => Int)
-  readonly weigth: number;
+  weigth: number;
   @Field(() => Int)
-  readonly status: number;
+  status: number;
 }

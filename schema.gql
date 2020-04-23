@@ -2,6 +2,34 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Mutation {
+  createProduct(input: ProductInput!): ProductType!
+  updateProduct(input: ProductInput!, sku: String!): ProductType!
+  deleteProduct(sku: String!): ProductType!
+}
+
+input ProductInput {
+  sku: String
+  name: String
+  description: String
+  isactive: Boolean
+  price: Int
+  weigth: Int
+  status: Int
+}
+
+type ProductType {
+  sku: String!
+  name: String!
+  description: String!
+  isactive: Boolean!
+  price: Int!
+  weigth: Int!
+  status: Int!
+}
+
 type Query {
   hello: String!
+  Product: [ProductType!]!
+  ProductBySku(sku: String!): [ProductType!]!
 }

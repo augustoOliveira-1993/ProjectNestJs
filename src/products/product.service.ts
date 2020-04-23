@@ -14,6 +14,25 @@ export class ProductService {
   }
 
   async findAll(): Promise<Product[]> {
-    return this.productModel.find().exec();
+    return await this.productModel.find().exec();
+  }
+
+  async findBySku(sku: string): Promise<Product[]> {
+    return this.productModel.find({ sku: sku });
+  }
+
+  async update(
+    sku: string,
+    updateProductForDto: ProductInput,
+  ): Promise<Product> {
+    const updateProduct = await this.productModel.findOneAndUpdate(
+      { sku },
+      updateProductForDto,
+      { new: true },
+    );
+    return updateProduct;
+  }
+  async delete(sku: string): Promise<Product> {
+    return this.productModel.findOneAndDelete({ sku });
   }
 }

@@ -1,19 +1,19 @@
-import { InputType, Field, Int } from 'type-graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 
 @InputType()
 export class ProductInput {
-  @Field()
+  @Field({ nullable: true })
   readonly sku: string;
-  @Field()
+  @Field({ nullable: true })
   readonly name: string;
-  @Field()
-  readonly description: string;
-  @Field()
-  readonly isactive: boolean;
-  @Field(() => Int)
-  readonly price: number;
-  @Field(() => Int)
-  readonly weigth: number;
-  @Field(() => Int)
-  readonly status: number;
+  @Field({ nullable: true })
+  readonly description?: string;
+  @Field({ nullable: true })
+  readonly isactive?: boolean;
+  @Field(() => Int, { nullable: true })
+  readonly price?: number;
+  @Field(() => Int, { nullable: true })
+  readonly weigth?: number;
+  @Field(() => Int, { nullable: true })
+  readonly status?: number;
 }
