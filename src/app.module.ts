@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ProdutcModel } from './products/product.module';
 import { TestService } from './product/test/test.service';
+import { ProductService } from './product/product.service';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { TestService } from './product/test/test.service';
     MongooseModule.forRoot('mongodb://localhost:27018/docker'),
   ],
   controllers: [AppController],
-  providers: [AppService, TestService],
+  providers: [AppService, TestService, ProductService],
 })
 export class AppModule {}
