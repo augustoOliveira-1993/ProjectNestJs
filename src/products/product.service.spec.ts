@@ -1,24 +1,26 @@
 import { Test } from '@nestjs/testing';
 import { ProductService } from './product.service';
-import { ProductModel } from './product.module';
+//import { ProductModel } from './product.module';
 import { Product } from './interfaces/product.interface';
 
 describe('ProductService', () => {
   let productService: ProductService;
   const productsMock = [
     {
-      name: 'mock1',
       sku: 'sku-mock1',
+      name: 'mock1',
     },
     {
-      name: 'mock2',
       sku: 'sku-mock2',
+      name: 'mock2',
     },
   ];
   const productServiceMock = {
     mock: [] = [...productsMock],
-    findAll(): Promise<Product[]> {
-      return Promise.resolve([...this.mock]);
+    findBySku(sku: string) {
+      return productsMock.find(product => {
+        return product.sku === sku;
+      });
     },
   };
   beforeAll(async () => {
@@ -33,7 +35,7 @@ describe('ProductService', () => {
   });
 
   it('should find all products', async () => {
-    const retorno = await productService.findAll();
-    expect(retorno).toStrictEqual(productsMock);
+    const retorno = await productService.findBySku('sku-mock1');
+    expect(retorno.sku).toStrictEqual('sku-mock1');
   });
 });

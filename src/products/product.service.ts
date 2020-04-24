@@ -17,8 +17,8 @@ export class ProductService {
     return await this.productModel.find().exec();
   }
 
-  async findBySku(sku: string): Promise<Product[]> {
-    return this.productModel.find({ sku: sku });
+  async findBySku(sku: string): Promise<Product> {
+    return this.productModel.findOne({ sku });
   }
 
   async update(
