@@ -17,10 +17,8 @@ describe('ProductService', () => {
   ];
   const productServiceMock = {
     mock: [] = [...productsMock],
-    findBySku(sku: string) {
-      return productsMock.find(product => {
-        return product.sku === sku;
-      });
+    findAll(): Promise<Product[]> {
+      return Promise.resolve([...this.mock]);
     },
   };
   beforeAll(async () => {
@@ -35,7 +33,7 @@ describe('ProductService', () => {
   });
 
   it('should find all products', async () => {
-    const retorno = await productService.findBySku('sku-mock1');
-    expect(retorno.sku).toStrictEqual('sku-mock1');
+    const retorno = await productService.findAll();
+    expect(retorno).toStrictEqual(productsMock);
   });
 });
