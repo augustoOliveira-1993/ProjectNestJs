@@ -4,8 +4,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
 import { ProductModel } from './products/product.module';
-import { TestService } from './product/test/test.service';
-import { ProductService } from './product/product.service';
 
 @Module({
   imports: [
@@ -16,6 +14,6 @@ import { ProductService } from './product/product.service';
     MongooseModule.forRoot('mongodb://localhost:27018/docker'),
   ],
   controllers: [AppController],
-  providers: [AppService, TestService, ProductService],
+  providers: [AppService],
 })
 export class AppModule {}
