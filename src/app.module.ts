@@ -3,11 +3,11 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppService } from './app.service';
 import { AppController } from './app.controller';
-import { ProductModel } from './products/product.module';
+import { ProductsModel } from './products/product.module';
 
 @Module({
   imports: [
-    ProductModel,
+    ProductsModel,
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
     }),
